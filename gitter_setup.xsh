@@ -2,13 +2,18 @@
 
 # Copyright (c) 2016 Adam J Hartz <hartz@mit.edu>
 
-# xonshbot is free software: you can redistribute it and/or modify it under the
-# terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 2 of the License, or (at your option) any later
-# version.
+# xonshbot is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 
-# You should have received a copy of the GNU General Public License along with
-# xonshbot.  If not, see <http://www.gnu.org/licenses/>.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 GITTER_API_URL = 'https://api.gitter.im/v1/'
 GITTER_REQUEST_HEADERS = {'Authorization': 'Bearer %s' % $GITTER_APIKEY.strip(),
@@ -90,7 +95,7 @@ def handle_gitter():
         for m_id in new_ids:
             try:
                 gitter_request('user/%s/rooms/%s/unreadItems' % (GITTER_USER_ID, GITTER_ROOM_ID),
-                               {'chat': '["%s"]' % m_id}) 
+                               {'chat': '["%s"]' % m_id})
             except:
                 pass
 
