@@ -53,10 +53,12 @@ def gitter_send_msg(msg, to=None):
 SENDMSG['GITTER'] = gitter_send_msg
 
 GITTER_INPUT_BUFFER = b""
-GITTER_STREAM = get_gitter_stream()
+GITTER_STREAM = None
 
 def handle_gitter():
-    global GITTER_INPUT_BUFFER
+    global GITTER_INPUT_BUFFER, GITTER_STREAM
+    if GITTER_STREAM is None:
+        GITTER_STREAM = get_gitter_stream()
     while True:
         x = GITTER_STREAM.read(1)
         gitter_to_consider = GITTER_INPUT_BUFFER + x
