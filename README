@@ -2,7 +2,7 @@ xonshbot: IRC <-> Gitter.im bridge
 
 RUNNING
 
-Simply run the following, command after setting the environment variables
+Simply run the following command after setting the environment variables
 discussed below:
    $ xonsh xonshbot.xsh
 
