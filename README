@@ -4,7 +4,7 @@ RUNNING
 
 Simply run the following, command after setting the environment variables
 discussed below:
-   $ xonsh xoshbot.xsh
+   $ xonsh xonshbot.xsh
 
 
 xonshbot needs some important configuration to work as expected.  Options are
