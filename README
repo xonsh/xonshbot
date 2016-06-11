@@ -1,0 +1,33 @@
+xonshbot: IRC <-> Gitter.im bridge
+
+RUNNING
+
+Simply run the following, command after setting the environment variables
+discussed below:
+   $ xonsh xoshbot.xsh
+
+
+xonshbot needs some important configuration to work as expected.  Options are
+controlled by the following environment variables:
+   * $GITTER_APIKEY: The API key of the Gitter account the bot should use
+   * $GITTER_ROOM: The URL of the Gitter room the bot should enter (e.g.,
+                   "xonsh/xonsh")
+
+   * $IRC_HOST: The irc host to connect to (e.g., "irc.oftc.net")
+   * $IRC_PORT (optional): The port number (if not specified, 6667 will be
+                           used)
+
+   * $IRC_CHANNEL: The irc channel to join (e.g., "#xonsh")
+   * $IRC_NICK: The irc nick the bot should use (e.g., "lou-carcolh")
+   * $IRC_PASSWD: The password associated with the bot's nick
+
+
+LICENSE
+
+xonshbot is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 2 of the License, or (at your option) any later
+version.
+
+You should have received a copy of the GNU General Public License along with
+xonshbot.  If not, see <http://www.gnu.org/licenses/>.
