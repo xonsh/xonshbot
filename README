@@ -40,3 +40,10 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+
+DEVELOPMENT
+
+new developments happen in the 'devel' branch.  the 'master' branch always
+contains the most recent code (suspected to be working), which is run in
+the xonsh IRC/Gitter rooms.
