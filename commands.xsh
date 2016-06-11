@@ -19,12 +19,13 @@
 def _clone(sender, rest_of_line):
     # here, ignore the rest of the line and return instructions for cloning the
     # repo (toy example)
-    return ['You can clone xonsh with the following command: `$ git clone https://github.com/%s`' % $GITTER_ROOM]
+    return ['You can clone %s with the following command: `$ git clone https://github.com/%s`' % ($REPO_SHORT_NAME, $GITTER_ROOM)]
 
 def _about(sender, rest_of_line):
-    return ("I am Lou Carcolh, a bot designed to keep xonsh's IRC and Gitter "
+    return ("I am Lou Carcolh, a bot designed to keep %s's IRC and Gitter "
             'rooms in sync.  I am written in xonsh, and my source code is '
-            'available here: https://github.com/xonsh/xonshbot')
+            'available here, under the terms of the GNU AGPL (v3+): '
+            'https://github.com/xonsh/xonshbot') % ($REPO_SHORT_NAME)
 
 GITHUB_API_URL = 'https://api.github.com/'
 
@@ -33,9 +34,18 @@ def github_request(url):
 
 def _stars(sender, rest_of_line):
     nstars = github_request('repos/%s' % $GITTER_ROOM)['stargazers_count']
-    return '%s currently has %d stargazers' % ($GITTER_ROOM, nstars)
+    return '%s currently has %d stargazers' % ($REPO_SHORT_NAME, nstars)
 
+def _help(sender, rest_of_line):
+    return [_about(sender, rest_of_line),
+            'The following commands are available:',
+            '',
+            '!help  - This message'
+            '!bot   - Just the about message'
+            '!clone - How to clone the %s repo' % $REPO_SHORT_NAME,
+            '!stars - The number of stars the %s repo has' % $REPO_SHORT_NAME]
 
 COMMANDS['clone'] = _clone
 COMMANDS['bot'] = _about
 COMMANDS['stars'] = _stars
+COMMANDS['help'] = _help

@@ -36,6 +36,7 @@ from threading import Thread, Lock
 XONSHBOT_WRITE_LOCK = Lock()
 
 $XONSH_SHOW_TRACEBACK = True
+$REPO_SHORT_NAME = $GITTER_ROOM.split('/')[-1]
 HANDLERS = {}
 COMMANDS = {}
 SENDMSG = {}
