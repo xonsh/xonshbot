@@ -42,7 +42,7 @@ GITTER_USERNAME = _g_user['username']
 
 GITTER_MSG_URL = 'rooms/' + GITTER_ROOM_ID + '/chatMessages'
 
-def gitter_send_msg(msg):
+def gitter_send_msg(msg, to=None):
     # msg is a _bytes_ object, so we need to convert
     if isinstance(msg, bytes):
         msg = msg.decode()

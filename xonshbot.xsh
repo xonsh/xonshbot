@@ -33,16 +33,18 @@ from urllib.request import Request, urlopen
 
 from threading import Thread, Lock
 
+$XONSH_SHOW_TRACEBACK = True
+$RAISE_SUBPROC_ERROR = True
+
 XONSHBOT_WRITE_LOCK = Lock()
 
-$XONSH_SHOW_TRACEBACK = True
 $REPO_SHORT_NAME = $GITTER_ROOM.split('/')[-1]
 HANDLERS = {}
 COMMANDS = {}
 SENDMSG = {}
 
 
-def handle_commands(sender, msg_text):
+def handle_commands(sender, msg_text, recipient=None, types=None):
     if isinstance(msg_text, bytes):
         msg_text = msg_text.decode()
     msg_text = msg_text.lstrip()
@@ -53,8 +55,10 @@ def handle_commands(sender, msg_text):
             if isinstance(result, (str, bytes)):
                 result = [result]
             for i in result:
-                for s in SENDMSG:
-                    SENDMSG[s](i)
+                if types is None:
+                    types = SENDMSG
+                for s in types:
+                    SENDMSG[s](i, recipient)
 
 
 def default_mention_response(sender):
@@ -80,6 +84,10 @@ source gitter_setup.xsh
 # grab other commands, etc
 source commands.xsh
 
+try:
+    source custom.xsh
+except:
+    pass
 
 # keep us alive
 while any(HANDLERS[i].is_alive() for i in HANDLERS):

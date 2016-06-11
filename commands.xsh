@@ -24,8 +24,8 @@ def _clone(sender, rest_of_line):
 def _about(sender, rest_of_line):
     return ("I am Lou Carcolh, a bot designed to keep %s's IRC and Gitter "
             'rooms in sync.  I am written in xonsh, and my source code is '
-            'available here, under the terms of the GNU AGPL (v3+): '
-            'https://github.com/xonsh/xonshbot') % ($REPO_SHORT_NAME)
+            'available at the following URL, under the terms of the GNU AGPL '
+            '(v3+): https://github.com/xonsh/xonshbot') % ($REPO_SHORT_NAME)
 
 GITHUB_API_URL = 'https://api.github.com/'
 

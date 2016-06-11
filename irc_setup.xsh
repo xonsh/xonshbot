@@ -39,20 +39,24 @@ IRC_SOCKET.send(("PRIVMSG Nickserv :identify %s\r\n" % $IRC_PASSWD).encode())
 
 
 # some constants for use in IRC
-IRC_RELEVANT_MESSAGE_START = b"PRIVMSG " + $IRC_CHANNEL.encode()
+IRC_CHANNEL_MSG_START = b"PRIVMSG " + $IRC_CHANNEL.encode()
+IRC_PRIVATE_MSG_START = b"PRIVMSG " + $IRC_NICK.encode()
 
 
-def send_irc_msg(msg):
+def send_irc_msg(msg, to=None):
     for i in msg.splitlines():
-        _simple_send_irc_msg(i)
+        _simple_send_irc_msg(i, to)
 
 
-def _simple_send_irc_msg(msg):
+def _simple_send_irc_msg(msg, to=None):
     if not isinstance(msg, bytes):
         msg = msg.encode()
-    o = ("PRIVMSG %s :" % $IRC_CHANNEL).encode() + msg + b'\r\n'
+    if to is None:
+        to = $IRC_CHANNEL
+    elif isinstance(to, bytes):
+        to = to.decode()
     XONSHBOT_WRITE_LOCK.acquire()
-    IRC_SOCKET.send(("PRIVMSG %s :" % $IRC_CHANNEL).encode() + msg + b'\r\n')
+    IRC_SOCKET.send(("PRIVMSG %s :" % to).encode() + msg + b'\r\n')
     XONSHBOT_WRITE_LOCK.release()
 SENDMSG['IRC'] = send_irc_msg
 
@@ -74,11 +78,12 @@ def handle_irc():
             continue
         IRC_INPUT_BUFFER = lines.pop()
         for i in lines:
+            print(i)
             sender, rest = i.split(b' ', 1)
             sender = sender[1:sender.find(b'!')]
             if i.startswith(b'PING'):
                 IRC_SOCKET.send(b'PONG'+i[4:]+b'\r\n')
-            elif rest.startswith(IRC_RELEVANT_MESSAGE_START):
+            elif rest.startswith(IRC_CHANNEL_MSG_START):
                 msg = rest.split(b':', 1)[-1]
                 print('IRC', i)
                 for i in SENDMSG:
@@ -90,6 +95,9 @@ def handle_irc():
                         ($IRC_NICK.encode() + b',') in msg or
                         (b'@' + $IRC_NICK.encode()) in msg):
                     default_mention_response(sender.decode())
+            elif rest.startswith(IRC_PRIVATE_MSG_START):
+                msg = rest.split(b':', 1)[-1]
+                handle_commands(sender.decode(), msg.decode(), sender, ['IRC'])
 
 
 class IRCThread(Thread):
