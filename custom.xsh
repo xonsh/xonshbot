@@ -19,6 +19,14 @@ def _stars(sender, rest_of_line):
     print('nstars', nstars)
     return 'xonsh currently has %d stargazers' % nstars
 
+def _help(sender, rest_of_line):
+    s = _about(sender, rest_of_line) + '\n'
+    s += 'The following commands are available:\n\n'
+    s += '  !help  - This message\n'
+    s += '  !bot   - Just the about message\n'
+    s += '  !clone - How to clone the xonsh repo\n'
+    s += '  !stars - The number of stars the xonsh repo has\n'
+    return s
 
 COMMANDS['clone'] = _clone
 COMMANDS['bot'] = _about
