@@ -27,6 +27,7 @@ import atexit
 import select
 import string
 import socket
+import traceback
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -51,7 +52,12 @@ def handle_commands(sender, msg_text, recipient=None, types=None):
     body = msg_text.lstrip().split(' ')
     for i in COMMANDS:
         if body[0] == '!%s' % i:
-            result = COMMANDS[i](sender, ' '.join(body[1:]))
+            try:
+                result = COMMANDS[i](sender, ' '.join(body[1:]))
+            except:
+                exc_type, exc_value, exc_traceback = sys.exc_info()
+                exc = traceback.format_exception_only(exc_type, exc_value)[-1]
+                result = "ERROR running command %r: %s" % ('!' + i, exc)
             if isinstance(result, (str, bytes)):
                 result = [result]
             for i in result:

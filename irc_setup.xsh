@@ -78,18 +78,20 @@ def handle_irc():
             continue
         IRC_INPUT_BUFFER = lines.pop()
         for i in lines:
-            print(i)
             sender, rest = i.split(b' ', 1)
             sender = sender[1:sender.find(b'!')]
             if i.startswith(b'PING'):
                 IRC_SOCKET.send(b'PONG'+i[4:]+b'\r\n')
             elif rest.startswith(IRC_CHANNEL_MSG_START):
                 msg = rest.split(b':', 1)[-1]
-                print('IRC', i)
+                if msg.startswith(b'\x01ACTION'):
+                    resp = b'- `' + sender + b'` (IRC) ' + msg[7:-1]
+                else:
+                    resp = b'`' + sender + b'` (IRC) says: ' + msg
                 for i in SENDMSG:
                     if i == 'IRC':
                         continue
-                    SENDMSG[i](b'`' + sender + b'` (IRC) says: ' + msg)
+                    SENDMSG[i](resp)
                 handle_commands(sender.decode(), msg.decode())
                 if (($IRC_NICK.encode() + b':') in msg or
                         ($IRC_NICK.encode() + b',') in msg or
