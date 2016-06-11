@@ -78,7 +78,6 @@ def handle_irc():
             continue
         IRC_INPUT_BUFFER = lines.pop()
         for i in lines:
-            print(i)
             sender, rest = i.split(b' ', 1)
             sender = sender[1:sender.find(b'!')]
             if i.startswith(b'PING'):
