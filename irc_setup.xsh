@@ -41,7 +41,13 @@ IRC_SOCKET.send(("PRIVMSG Nickserv :identify %s\r\n" % $IRC_PASSWD).encode())
 # some constants for use in IRC
 IRC_RELEVANT_MESSAGE_START = b"PRIVMSG " + $IRC_CHANNEL.encode()
 
+
 def send_irc_msg(msg):
+    for i in msg.splitlines():
+        _simple_send_irc_msg(i)
+
+
+def _simple_send_irc_msg(msg):
     if not isinstance(msg, bytes):
         msg = msg.encode()
     o = ("PRIVMSG %s :" % $IRC_CHANNEL).encode() + msg + b'\r\n'

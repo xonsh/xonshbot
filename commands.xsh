@@ -37,13 +37,13 @@ def _stars(sender, rest_of_line):
     return '%s currently has %d stargazers' % ($REPO_SHORT_NAME, nstars)
 
 def _help(sender, rest_of_line):
-    return [_about(sender, rest_of_line),
-            'The following commands are available:',
+    return '\n'.join([_about(sender, rest_of_line),
             '',
+            'The following commands are available:',
             '!help  - This message',
             '!bot   - Just the about message',
             '!clone - How to clone the %s repo' % $REPO_SHORT_NAME,
-            '!stars - The number of stars the %s repo has' % $REPO_SHORT_NAME]
+            '!stars - The number of stars the %s repo has' % $REPO_SHORT_NAME])
 
 COMMANDS['clone'] = _clone
 COMMANDS['bot'] = _about
