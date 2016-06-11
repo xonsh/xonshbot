@@ -46,6 +46,23 @@ def handle_commands(sender, msg_text):
                 for s in SENDMSG:
                     SENDMSG[s](i)
 
+
+def default_mention_response(sender):
+    things = list(SENDMSG.keys())
+    nthings = len(things)
+    if nthings == 0:
+        return None
+    if nthings == 1:
+        others = things[0]
+    elif nthings == 2:
+        others = '%s and %s'  % tuple(things)
+    else:
+        others = ', '.join(things[:-1]) + ', and ' + things[-1]
+    for i in things:
+        msg = '%s: I am a bot.  I just relay messages between %s.' % (sender, others)
+        SENDMSG[i](msg)
+
+
 # grab the individual modules we are using
 source irc_setup.xsh
 source gitter_setup.xsh

@@ -76,6 +76,8 @@ def handle_gitter():
                         SENDMSG[i]('<@%s>: ' % msg['fromUser']['username'] + line)
             if len(m_body) == 1:
                 handle_commands(m_sender_id, m_body[0])
+            if GITTER_USERNAME in {i['screenName'] for i in msg['mentions']}:
+                default_mention_response('@' + m_sender_id)
             new_ids.append(m_id)
         # now that we're here, mark these messages as read
         for m_id in new_ids:

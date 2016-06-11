@@ -73,6 +73,8 @@ def handle_irc():
                         continue
                     SENDMSG[i](b'`' + sender + b'` (IRC) says: ' + msg)
                 handle_commands(sender.decode(), msg.decode())
+                if ($IRC_NICK.encode() + b':') in msg or ($IRC_NICK.encode() + b',') in msg:
+                    default_mention_response(sender.decode())
 
 
 class IRCThread(Thread):
