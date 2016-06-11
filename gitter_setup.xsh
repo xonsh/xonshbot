@@ -8,11 +8,6 @@
 # You should have received a copy of the GNU General Public License along with
 # xonshbot.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
-import time
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
-
 GITTER_API_URL = 'https://api.gitter.im/v1/'
 GITTER_REQUEST_HEADERS = {'Authorization': 'Bearer %s' % $GITTER_APIKEY.strip(),
                           'Accept': 'application/json'}
@@ -79,6 +74,8 @@ def handle_gitter():
                 for i in SENDMSG:
                     if i != 'GITTER':
                         SENDMSG[i]('<@%s>: ' % msg['fromUser']['username'] + line)
+            if len(m_body) == 1:
+                handle_commands(m_sender_id, m_body[0])
             new_ids.append(m_id)
         # now that we're here, mark these messages as read
         for m_id in new_ids:

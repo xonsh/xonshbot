@@ -12,11 +12,15 @@
 
 import re
 import sys
+import json
 import time
 import atexit
 import select
 import string
 import socket
+
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 from threading import Thread, Lock
 
@@ -26,6 +30,21 @@ $XONSH_SHOW_TRACEBACK = True
 HANDLERS = {}
 COMMANDS = {}
 SENDMSG = {}
+
+
+def handle_commands(sender, msg_text):
+    if isinstance(msg_text, bytes):
+        msg_text = msg_text.decode()
+    msg_text = msg_text.lstrip()
+    body = msg_text.lstrip().split(' ')
+    for i in COMMANDS:
+        if body[0] == '!%s' % i:
+            result = COMMANDS[i](sender, ' '.join(body[1:]))
+            if isinstance(result, (str, bytes)):
+                result = [result]
+            for i in result:
+                for s in SENDMSG:
+                    SENDMSG[s](i)
 
 # grab the individual modules we are using
 source irc_setup.xsh

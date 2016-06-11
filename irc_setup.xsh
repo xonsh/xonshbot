@@ -72,6 +72,7 @@ def handle_irc():
                     if i == 'IRC':
                         continue
                     SENDMSG[i](b'`' + sender + b'` (IRC) says: ' + msg)
+                handle_commands(sender.decode(), msg.decode())
 
 
 class IRCThread(Thread):
