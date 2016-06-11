@@ -31,3 +31,4 @@ def _help(sender, rest_of_line):
 COMMANDS['clone'] = _clone
 COMMANDS['bot'] = _about
 COMMANDS['stars'] = _stars
+COMMANDS['help'] = _help
