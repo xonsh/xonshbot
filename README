@@ -9,6 +9,10 @@ discussed below:
 
 xonshbot needs some important configuration to work as expected.  Options are
 controlled by the following environment variables:
+
+   * $GITHUB_URL: The URL to the root Github repo WITH TRAILING SLASH
+                  (e.g., "https://github.com/xonsh/xonsh/")
+
    * $GITTER_APIKEY: The API key of the Gitter account the bot should use
    * $GITTER_ROOM: The URL of the Gitter room the bot should enter (e.g.,
                    "xonsh/xonsh")

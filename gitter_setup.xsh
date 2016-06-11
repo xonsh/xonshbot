@@ -71,6 +71,11 @@ def handle_gitter():
                 m_url = 'https://gitter.im/%s?at=%s' % ($GITTER_ROOM, m_id)
                 m_body += ['[Full message on Gitter.im: %s]' % m_url]
             for line in m_body:
+                for i in msg['issues']:
+                    line = line.replace('#' + i['number'],
+                                        '#%s (%sissues/%s)' % (i['number'],
+                                                               $GITHUB_URL,
+                                                               i['number']))
                 for i in SENDMSG:
                     if i != 'GITTER':
                         SENDMSG[i]('<@%s>: ' % msg['fromUser']['username'] + line)
