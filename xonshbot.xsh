@@ -2,6 +2,8 @@
 # with some Github integration
 # written in xonsh :)
 
+# Copyright (c) 2016 Adam J Hartz <hartz@mit.edu>
+
 # xonshbot is free software: you can redistribute it and/or modify it under the
 # terms of the GNU General Public License as published by the Free Software
 # Foundation, either version 2 of the License, or (at your option) any later
@@ -10,6 +12,7 @@
 # You should have received a copy of the GNU General Public License along with
 # xonshbot.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import re
 import sys
 import json
@@ -68,7 +71,12 @@ source irc_setup.xsh
 source gitter_setup.xsh
 
 # grab other commands, etc
-source custom.xsh
+source commands.xsh
+
+try:
+    source custom.xsh
+except:
+    pass
 
 # keep us alive
 while any(HANDLERS[i].is_alive() for i in HANDLERS):
