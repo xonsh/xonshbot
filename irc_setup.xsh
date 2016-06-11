@@ -63,8 +63,8 @@ def handle_irc():
         for i in lines:
             sender, rest = i.split(b' ', 1)
             sender = sender[1:sender.find(b'!')]
-            if sender == b'PING':
-                IRC_SOCKET.send(b'PONG'+i[4:])
+            if i.startswith(b'PING'):
+                IRC_SOCKET.send(b'PONG'+i[4:]+b'\r\n')
             elif rest.startswith(IRC_RELEVANT_MESSAGE_START):
                 msg = rest.split(b':', 1)[-1]
                 print('IRC', i)
