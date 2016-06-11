@@ -91,7 +91,9 @@ def handle_irc():
                         continue
                     SENDMSG[i](b'`' + sender + b'` (IRC) says: ' + msg)
                 handle_commands(sender.decode(), msg.decode())
-                if ($IRC_NICK.encode() + b':') in msg or ($IRC_NICK.encode() + b',') in msg:
+                if (($IRC_NICK.encode() + b':') in msg or
+                        ($IRC_NICK.encode() + b',') in msg or
+                        (b'@' + $IRC_NICK.encode()) in msg):
                     default_mention_response(sender.decode())
             elif rest.startswith(IRC_PRIVATE_MSG_START):
                 msg = rest.split(b':', 1)[-1]
