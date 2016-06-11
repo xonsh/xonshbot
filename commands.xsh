@@ -40,8 +40,8 @@ def _help(sender, rest_of_line):
     return [_about(sender, rest_of_line),
             'The following commands are available:',
             '',
-            '!help  - This message'
-            '!bot   - Just the about message'
+            '!help  - This message',
+            '!bot   - Just the about message',
             '!clone - How to clone the %s repo' % $REPO_SHORT_NAME,
             '!stars - The number of stars the %s repo has' % $REPO_SHORT_NAME]
 

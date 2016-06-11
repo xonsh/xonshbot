@@ -80,10 +80,6 @@ source gitter_setup.xsh
 # grab other commands, etc
 source commands.xsh
 
-try:
-    source custom.xsh
-except:
-    pass
 
 # keep us alive
 while any(HANDLERS[i].is_alive() for i in HANDLERS):
