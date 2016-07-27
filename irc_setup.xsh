@@ -103,9 +103,9 @@ def handle_irc():
             elif rest.startswith(IRC_CHANNEL_MSG_START):
                 msg = rest.split(b':', 1)[-1]
                 if msg.startswith(b'\x01ACTION'):
-                    resp = b'- **' + sender + b'** ' + msg[7:-1]
+                    resp = b'- **<' + sender + b'>** ' + msg[7:-1]
                 else:
-                    resp = b'**' + sender + b'**: ' + msg
+                    resp = b'**<' + sender + b'>**: ' + msg
                 for i in SENDMSG:
                     if i == 'IRC':
                         continue

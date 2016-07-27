@@ -87,7 +87,7 @@ def handle_gitter():
                                                                i['number']))
                 for i in SENDMSG:
                     if i != 'GITTER':
-                        SENDMSG[i]('\x02@%s:\x0f ' % msg['fromUser']['username'] + line)
+                        SENDMSG[i]('\x02<@%s>:\x0f ' % msg['fromUser']['username'] + line)
             if len(m_body) == 1:
                 handle_commands(m_sender_id, m_body[0])
             if GITTER_USERNAME in {i['screenName'] for i in msg['mentions']}:
