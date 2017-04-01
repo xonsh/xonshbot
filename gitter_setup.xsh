@@ -104,7 +104,7 @@ def handle_gitter():
 
 class GitterThread(Thread):
     def __init__(self):
-        Thread.__init__(self)
+        Thread.__init__(self, daemon=True)
         self.start()
     def run(self):
         handle_gitter()

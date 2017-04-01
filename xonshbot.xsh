@@ -90,6 +90,8 @@ source gitter_setup.xsh
 # grab other commands, etc
 source commands.xsh
 
+source feeds.xsh
+
 try:
     source custom.xsh
 except:

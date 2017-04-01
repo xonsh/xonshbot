@@ -126,7 +126,7 @@ def handle_irc():
 
 class IRCThread(Thread):
     def __init__(self):
-        Thread.__init__(self)
+        Thread.__init__(self, daemon=True)
         self.start()
     def run(self):
         handle_irc()
