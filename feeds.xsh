@@ -14,11 +14,11 @@ def stackoverflow_question(info, body):
 
 
 def run():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
     while True:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         app.run()
-        time.sleep(1*60*60)  # 1 hour
+        time.sleep(60*60)  # 1 hour
 
 HANDLERS['FEEDS'] = threading.Thread(name="feeds", target=run, daemon=True)
 HANDLERS['FEEDS'].start()
