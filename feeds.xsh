@@ -18,7 +18,7 @@ def run():
     asyncio.set_event_loop(loop)
     while True:
         app.run()
-        time.sleep(60*60*60)  # 1 hour
+        time.sleep(1*60*60)  # 1 hour
 
 HANDLERS['FEEDS'] = threading.Thread(name="feeds", target=run, daemon=True)
 HANDLERS['FEEDS'].start()
