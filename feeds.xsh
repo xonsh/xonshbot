@@ -6,6 +6,7 @@ from feedy import Feedy
 app = Feedy('feeds.shelve')
 
 @app.add('https://stackoverflow.com/feeds/tag?tagnames=xonsh&sort=newest')
+@app.add('https://unix.stackexchange.com/feeds/tag?tagnames=xonsh&sort=newest')
 def stackoverflow_question(info, body):
     # site_title, site_subtitle, site_url, fetched_at, article_title, article_url, published_at, updated_at
     msg = "New question on StackOverflow: {article_title} {article_url}".format(**info)
